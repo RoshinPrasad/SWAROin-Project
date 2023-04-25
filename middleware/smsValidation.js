@@ -1,5 +1,6 @@
 const fast2sms = require("fast-two-sms");
 require("dotenv").config();
+
 const sendMessage = function (mobile, res, next) {
  let randomOTP = Math.floor(Math.random() * 9000)+1000;
   var options = {
