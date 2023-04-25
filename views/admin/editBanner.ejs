@@ -1,0 +1,69 @@
+<%- include ('../layouts/adminHeader.ejs') %>
+
+
+        <h4 class="text-center text-success my-5">Edit Banner</h4>
+        <h3 style="color: red;text-align: center;">
+            <%=message%>
+        </h3>
+        <form action="/admin/edit-Banner" method="post" style="margin-left: 15%;width: 50%;"
+            enctype="multipart/form-data">
+            <fieldset>
+                <!-- Text input-->
+
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="product_name">Name</label>
+                    <br>
+                    <input id="product_name" name="bName" placeholder="Name" class="form-control input-md highlight"
+                        required="" type="text" value="<%=banner.name%>">
+
+                    <!-- Text input-->
+                    <label class="col-md-4 control-label" for="product_name">Description</label>
+                    <br>
+                    <input id="product_name" name="bDescription" placeholder="Enter Description"
+                        class="form-control input-md highlight" required="" type="text" value="<%=banner.description%>">
+
+                    <!-- File Button -->
+                    <label for="filebutton">Choose image</label>
+                    <br>
+                    <% for(let key of banner.image){ %>
+
+                        <img src="/uploads/<%=key %>" class="img-thumbnail rounded" width="200px" height="200px"
+                            style="border: 4px;" alt="error">
+
+                        <%}%>
+                            <br>
+                            <br>
+                            <input id="filebutton" name="bImage" class="input-file" type="file" required multiple
+                                accept="image/*">
+
+
+                            <!-- Button -->
+                            <div style="margin-left: 25%;" class="my-3">
+                                <input type="hidden" name="id" value="<%= banner._id%>">
+                                <button type="submit" id="singlebutton" name="singlebutton"
+                                    class="btn btn-success">+Add</button>
+                                <a href="/admin/banner"><button type="button" id="singlebutton" name="singlebutton"
+                                        class="btn btn-outline-light mx-3">Go back</button></a>
+                            </div>
+
+            </fieldset>
+        </form>
+
+
+
+
+        <style>
+            .highlight {
+                border-color: aliceblue;
+                margin-top: 2%;
+                margin-bottom: 2%;
+            }
+        </style>
+
+
+
+
+
+        <%- include ('../layouts/adminFooter.ejs') %>

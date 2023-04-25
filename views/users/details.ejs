@@ -1,0 +1,282 @@
+<%- include ('../layouts/header.ejs') %>
+    <!-- <style>
+   div{
+    border: solid red 1px;
+   }
+ </style> -->
+<br>
+    <!-- Breadcrumb Start -->
+    <div class="container-fluid">
+        <div class="row px-xl-5">
+            <div class="col-12">
+                <nav class="breadcrumb bg-light mb-30">
+                    <a class="breadcrumb-item text-dark" href="/home">Home</a>
+                    <a class="breadcrumb-item text-dark" href="#">Shop</a>
+                    <span class="breadcrumb-item active">Shop Detail</span>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+
+
+    <!-- Shop Detail Start -->
+ 
+    <!-- Shop Detail Start -->
+    <div class="container-fluid pb-5">
+        <div class="row px-xl-5">
+            
+                <% for(i=0;i<detail.image.length;i++){ %>
+                    <div class="col-md-6 position-relative ">
+                      <div class="d-flex justify-content-center  p-3">
+                        <div id="img-container" class="img-cont">
+                          <img id="main-image" class="main-image " src="/uploads/<%=detail.image[i]%>" alt="">
+                        </div>
+                      </div>
+                      <div class="d-flex px-5 justify-content-center">
+                        <div class="col-2 d-flex justify-content-center mx-3">
+                          <div class="card product-alt-card p-2">
+                            <img class="product-alt-images" id="image1" onclick="changeImage(this)"
+                              src="/uploads/<%=detail.image[i]%>" alt="">
+                          </div>
+                        </div>
+                        <div class="col-2 d-flex justify-content-center mx-3">
+                          <div class="card product-alt-card p-2">
+                            <img class="product-alt-images" id="image2" onclick="changeImage(this)"
+                              src="/uploads/<%=detail.image[i+1]%>" alt="">
+                          </div>
+                        </div>
+                        <div class="col-2 d-flex justify-content-center mx-3">
+                          <div class="card product-alt-card p-2">
+                            <img class="product-alt-images" id="image3" onclick="changeImage(this)" src="/uploads/<%=detail.image[i+2]%>"
+                              alt="">
+                          </div>
+                        </div>
+                      </div>
+                    
+                    </div>
+                    <% break }%>
+
+            <div class="col-md-6 h-auto mb-30">
+                <div class="h-100  p-30 ">
+                    <br>
+                    <h2 class="text-uppercase">
+                        <%=detail.name%>
+                    </h2>
+                    <div class="d-flex mb-3">
+                        <div class="text-primary mr-2">
+                            <!-- <small class="fas fa-star"></small>
+                        <small class="fas fa-star"></small>
+                        <small class="fas fa-star"></small>
+                        <small class="fas fa-star-half-alt"></small>
+                        <small class="far fa-star"></small> -->
+                        </div>
+                        <!-- <small class="pt-1">Rating<%detail.rating%></small> -->
+                    </div>
+                    <h3 class="font-weight-semi-bold mb-4">Rs <%=detail.price%> /-
+                    </h3>
+                    <p class="mb-4">
+                        <%=detail.description%>
+                    </p>
+                    <div class="d-flex mb-3">
+                        <!-- <strong class="text-dark mr-3">Sizes:</strong> -->
+                        <form>
+                            <!-- <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="size-1" name="size">
+                            <label class="custom-control-label" for="size-1">XS</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="size-2" name="size">
+                            <label class="custom-control-label" for="size-2">S</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="size-3" name="size">
+                            <label class="custom-control-label" for="size-3">M</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="size-4" name="size">
+                            <label class="custom-control-label" for="size-4">L</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="size-5" name="size">
+                            <label class="custom-control-label" for="size-5">XL</label>
+                        </div> -->
+                        </form>
+                    </div>
+                    <!-- <div class="d-flex mb-4">
+                        <strong class="text-dark mr-3">Colors:</strong>
+                        <form>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" class="custom-control-input" id="color-1" name="color">
+                                <label class="custom-control-label" for="color-1">Black</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" class="custom-control-input" id="color-2" name="color">
+                                <label class="custom-control-label" for="color-2">White</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" class="custom-control-input" id="color-3" name="color">
+                                <label class="custom-control-label" for="color-3">Red</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" class="custom-control-input" id="color-4" name="color">
+                                <label class="custom-control-label" for="color-4">Blue</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" class="custom-control-input" id="color-5" name="color">
+                                <label class="custom-control-label" for="color-5">Green</label>
+                            </div>
+                        </form>
+                    </div> -->
+                    <% if(detail.stock<=5){%>
+                        <% if(detail.stock<1){%>
+                            <h6 style="color: red;">Stock Out!!</h6>
+                            <a href="/addToCart?id=<%=detail._id%>"> <button class="btn btn-primary px-3" disabled><i
+                                        class="fa fa-shopping-cart mr-1 "></i> Add To
+                                    Cart </button></a>
+                            <%}else{%>
+                                <h6 style="color: red;">Only <%=detail.stock%> left</h6>
+                                <a href="/addToCart?id=<%=detail._id%>"> <button class="btn btn-primary px-3"><i
+                                            class="fa fa-shopping-cart mr-1"></i> Add To
+                                        Cart</button></a>
+                                <%}}else{%>
+                                    <a href="/addToCart?id=<%=detail._id%>"> <button class="btn btn-primary px-3"><i
+                                                class="fa fa-shopping-cart mr-1"></i> Add To
+                                            Cart</button></a>
+                                    <%}%>
+                </div>
+                <div>
+                    <h5 class="" style="color: green;">
+                        <%=message%>
+                    </h5>
+                </div>
+
+            </div>
+        
+    </div>
+    <br>
+    <hr>
+    <div class="row px-xl-5">
+        <div class="col">
+            <div class=" p-30">
+                <div class="nav nav-tabs mb-4">
+                    <a class="nav-item nav-link text-dark active" data-toggle="tab" href="#tab-pane-1">Reviews</a>
+                    <a class="nav-item nav-link text-dark" data-toggle="tab" href="#tab-pane-2">Related Products</a>
+                </div>
+                <div class="tab-content">
+                    
+                    
+                    <div class="tab-pane fade show active" id="tab-pane-1">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="media mb-4">
+                                    <div class="media-body">
+                                        <%for(i=0;i<detail.review.length;i++){%>
+                                            <h6>
+                                                <%=detail.review[i].username%>
+                                            </h6>
+                                            <p>
+                                                <%=detail.review[i].review%>
+                                            </p>
+                                            
+                                            <%}%>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="tab-pane fade" id="tab-pane-2">
+                        <div class="row">
+                            <% for(i=0;i<related.length;i++){%>
+                                        <div class="col-12 col-md-4 mb-4">
+                                            <div class="card h-100">
+                                                <a href="/view-details?id=<%=related[i]._id%>">
+                                                    <img src="/uploads/<%=related[i].image[0]%>" class="card-img-top" alt="...">
+                                                </a>
+                                                <div class="card-body">
+                                                    <ul class="list-unstyled d-flex justify-content-between">
+                                                        <li>
+                                                            <i class="text-warning fa fa-star"></i>
+                                                            <i class="text-warning fa fa-star"></i>
+                                                            <i class="text-warning fa fa-star"></i>
+                                                            <i class="text-muted fa fa-star"></i>
+                                                            <i class="text-muted fa fa-star"></i>
+                                                        </li>
+                                                        <li class="text-muted text-right">Rs <%=related[i].price%></li>
+                                                    </ul>
+                                                    <a href="/view-details?id=<%=related[i]._id%>" class="h2 text-decoration-none text-dark"> <%=related[i].name%></a>
+                                                    <p class="card-text">
+                                                       
+                                                    </p>
+                                                    
+                                                                                <a href="/addToCart?id=<%=detail._id%>"> <button class="btn btn-primary px-3"><i
+                                                                                    class="fa fa-shopping-cart mr-1"></i> Add To
+                                                                                Cart</button></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                        
+                                        <%}%>
+                        
+                                        
+                                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+
+  
+       
+
+</div>
+
+    </div>
+    <!-- Shop Detail End -->
+
+
+
+    <!-- Products Start -->
+
+   
+<!-- jrsrdcfvgbhngfedfghgyfdsdfghufydtsdfghvgb -->
+
+
+
+
+
+    <!-- <script src="https://unpkg.com/js-image-zoom/js-image-zoom.js"></script>  -->
+    <script src="https://cdn.jsdelivr.net/npm/js-image-zoom/js-image-zoom.min.js"></script> 
+    <script src="/script/scriptadmin.js"></script>
+
+    <script>
+      const mainimage = document.getElementById("main-image")
+      function changeImage(image) {
+        mainimage.src = image.src
+        new ImageZoom(document.getElementById("img-container"), options);
+      }
+      var options = {
+        width: 300,
+        height: 350,
+        zoomWidth: 300,
+        
+
+
+
+        // required
+        // more options here
+      };
+      new ImageZoom(document.getElementById("img-container"), options);
+
+    </script>
+
+
+
+    <%- include ('../layouts/footer.ejs') %>

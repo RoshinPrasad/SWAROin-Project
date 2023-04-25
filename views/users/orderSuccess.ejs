@@ -1,0 +1,70 @@
+<%- include ('../layouts/header.ejs') %>
+
+    <style type="text/css">
+    
+
+        .payment {
+            border: 1px solid #000000;
+            height: 280px;
+            border-radius: 20px;
+            background: #fff;
+        }
+
+        .payment_header {
+            background: rgb(42, 125, 11);
+            padding: 20px;
+            border-radius: 20px 20px 0px 0px;
+
+        }
+
+        .check {
+            margin: 0px auto;
+            width: 50px;
+            height: 50px;
+            border-radius: 100%;
+            background: #fff;
+            text-align: center;
+        }
+
+        .check i {
+            vertical-align: middle;
+            line-height: 50px;
+            font-size: 30px;
+        }
+
+        .content {
+            text-align: center;
+        }
+
+        .content h1 {
+            font-size: 25px;
+            padding-top: 25px;
+        }
+
+        .content a {
+            width: 200px;
+            height: 35px;
+            color: #fff;
+            border-radius: 30px;
+            padding: 5px 10px;
+            background: rgb(10, 159, 8);
+            
+        }
+
+        .content a:hover {
+            text-decoration: none;
+            background: #000;
+        }
+    </style>
+
+
+<div class="d-flex justify-content-center"><lottie-player class="d-flex justify-content-center" src="https://assets4.lottiefiles.com/packages/lf20_waygllpi.json"  background="transparent"  speed="1"  style="width: 350px; height: 350px;" autoplay   ></lottie-player></div>
+<div class="content">
+    <h1>Order Success !</h1>
+    <p>your order is succesfull thank you for shopping... !</p>
+    <a href="/home">Go to Home</a>
+</div>
+    
+    <br>
+
+    <%- include ('../layouts/footer.ejs') %>

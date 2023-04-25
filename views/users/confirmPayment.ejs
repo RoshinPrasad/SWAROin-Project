@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Razorpay Payment Gateway Integration</title>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+    <style>
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        body {
+
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f2f2f2;
+            background-image: url(https://www.lyra.com/in/wp-content/uploads/sites/8/2019/05/2-4.png);
+            background-repeat: no-repeat;
+            display: flex;
+            background-size: cover;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 35px;
+            box-shadow: 0 12px 18px rgba(0, 0, 0, 0.9);
+            animation: fadeIn 0.8s ease-out;
+            width: 300px;
+            max-width: 800px;
+            margin: 0 auto;
+
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 25px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 50px;
+        }
+
+        input[type="hidden"] {
+            display: none;
+        }
+
+        .btn {
+            background-color: #dcd628;
+            color: white;
+            border-radius: 30px;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            text-transform: uppercase;
+            margin-top: 25px;
+        }
+
+        .btn:hover {
+            background-color: #9f9509;
+        }
+
+        .processing {
+            background-color: #bcbcbc;
+            cursor: default;
+        }
+
+        .processing:hover {
+            background-color: #bcbcbc;
+        }
+
+        .logo {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 25px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <h1>Pay with Razorpay</h1>
+        <form method="get" action="/onlinePayment">
+            <input type="hidden" name="userId" value="<%= userId %>">
+            <input type="hidden" name="total" value="<%= total %>">
+            <input type="hidden" name="order_id" value="<%= orderId %>">
+            <input type="hidden" name="key_id" value="<%= key_id %>">
+            <input type="hidden" name="order" value="<%= JSON.stringify(orders) %>">
+            <input type="hidden" name="user" value="<%= JSON.stringify(user) %>">
+            <input type="hidden" name="payment_id" id="payment_id_input">
+            <button class="btn" id="razorpay-button">Pay Now</button>
+        </form>
+    </div>
+
+    <script>
+        var options = {
+            "key": "<%= key_id %>",
+            "amount": "<%= total %>00",
+            "currency": "INR",
+            "name": "SWAROin",
+            "description": "Payment for your order",
+            "image": "/assets/img/favicon.png",
+            "order_id": "<%= order_id %>",
+            "handler": function (response) {
+                // Handle successful payment
+                console.log(response);
+                var paymentId = response.razorpay_payment_id;
+                document.getElementById("payment_id_input").value = response.razorpay_payment_id;
+                document.getElementById("razorpay-button").disabled = true;
+                document.getElementById("razorpay-button").innerHTML = "Processing Payment...";
+                document.forms[0].submit();
+            },
+            "prefill": {
+                "name": "<%= user.name %>",
+                "email": "<%= user.email %>",
+                "contact": "<%= user.phone %>"
+            },
+            "notes": {
+                "address": "<%= user.address %>"
+            },
+            "theme": {
+                "color": "green"
+            }
+        };
+        var rzp = new Razorpay(options);
+        rzp.on('payment.success', function (response) {
+            res.send('payment Success')
+            var payment_id = response.razorpay_payment_id;
+            $.ajax({
+                url: '/onlinePayment',
+                type: 'GET',
+                data: { payment_id: payment_id },
+                success: function (data) {
+                    // display a success message to the user
+                    alert('Payment successful!');
+                } 
+                
+            });
+        });
+        rzp.on('payment.cancel', function (response) {
+        // Handle payment cancellation
+        res.send('Payment cancelled');
+        // Reset the UI or perform any other necessary action
+    });
+
+        document.getElementById('razorpay-button').onclick = function (e) {
+            rzp.open();
+            e.preventDefault();
+        }
+    </script>
+</body>
+
+</html>

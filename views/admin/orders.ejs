@@ -1,0 +1,180 @@
+<%- include ('../layouts/adminHeader.ejs') %>
+
+
+   <style>
+        table,
+        th,
+        td {
+            border: 1px solid rgba(7, 7, 7, 0.701);
+        }
+    </style> 
+
+    
+        <h4 class="text-center my-5 text-success">ORDER MANAGEMENT</h4>
+        <input type="date" name="startdate" id="startdate" onchange="cli()">
+        <input type="date" name="enddate" id="enddate" onchange="cli()">
+        <button type="button" id="pdf">Download</button>
+        <table class="table text-center border " id="ordersTable">
+            <thead>
+                <tr>
+                    <th scope="col">SL NO</th>
+                    <th scope="col">Order Id</th>
+                    <th scope="col">User Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Payment Method</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">ACTION</th>
+
+
+                </tr>
+            </thead>
+            <tbody id="tbody">
+                <% if(orders.length> 0){ %>
+                    <% for(let i=1;i<=orders.length; i++){ %>
+                        <tr>
+                            <th>
+                                <%= i %>
+                            </th>
+                            <td>
+                                <%= orders[i-1]._id %>
+                            </td>
+                            <td>
+                                <%=orders[i-1].userId.name%>
+                            </td>
+                            <td>
+                                <%= orders[i-1].payment.amount%>
+                            </td>
+                            <td>
+                                <%= orders[i-1].payment.method%>
+
+                            </td>
+                            <td>
+                                <%= orders[i-1].status%>
+                            </td>
+                            <td>
+                                <%= orders[i-1].createdAt%>
+                            </td>
+                            <td>
+                                <a class="text-white btn btn-secondary"
+                                    href="/admin/loadOrderDetails?id=<%=orders[i-1]._id%>">view Details</a><br>
+                                <br>
+                                <form action="/admin/updateStatus" method="post">
+                                    <select name="status" class="browser-default custom-select">
+                                        <option><%=orders[i-1].status%></option>
+                                        <option>cancelled</option>
+                                        <option>Delivered</option>
+                                        <option>Shipped</option>
+                                        <option>packed</option>
+                                    </select>
+                                    <input type="hidden" name="orderId" value="<%=orders[i-1]._id%>">
+                                    <% if (orders[i-1].status!="returned" &&orders[i-1].status!="cancelled" ){%>
+                                        <button style="background-color: rgb(122, 214, 157);" type="submit">update</button>
+                                        <%}else{%>
+                                            <%}%>
+                                </form>
+                            </td>
+
+
+
+
+                        </tr>
+
+                        <% } } else{ %>
+                            <tr>
+                                <td colspan="5">Products Not Found</td>
+                            </tr>
+                            <% } %>
+
+            </tbody>
+        </table>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.min.js"></script>
+
+
+
+        <!-- SheetJS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            // Download as PDF
+            // console.log(jsPDF);
+            document.getElementById('pdf').addEventListener('click', function () {
+                var doc = new jsPDF();
+                doc.autoTable({
+                    html: '#ordersTable',
+                    columns: [
+                        { header: 'Order ID', dataKey: 'Order ID' },
+                        { header: 'Product', dataKey: 'Product' },
+                        { header: 'Price', dataKey: 'Price' },
+                        { header: 'Method', dataKey: 'Method' },
+                        { header: 'Method', dataKey: 'Method' },
+                        { header: 'Method', dataKey: 'Method' },
+                        { header: 'Method', dataKey: 'Method' },
+
+
+                    ]
+                });
+                doc.save('sales.pdf');
+            });
+
+
+            // Download as Excel
+            // document.getElementById('downloadExcelBtn').addEventListener('click', function() {
+            // Get the table element
+            //   var table = document.getElementById('ordersTable');
+
+            // Convert the table data to a worksheet object
+            //   var worksheet = XLSX.utils.table_to_sheet(table);
+
+            // Create a new workbook and add the worksheet
+            //   var workbook = XLSX.utils.book_new();
+            //   XLSX.utils.book_append_sheet(workbook, worksheet, 'Sales');
+
+            // Save the Excel file
+            //   XLSX.writeFile(workbook, 'sales.xlsx');
+            // });
+
+
+            function cli() {
+                start = document.getElementById("startdate").value
+                end = document.getElementById("enddate").value
+                console.log(start, end);
+                data = { start: start, end: end }
+                axios.post('/admin/updateOrder', data)
+                    .then(res => {
+                        if (res.data) {
+                            console.log(res.data);
+                            console.log(res.data.orderDetail);
+                            let orders = res.data.orderDetail
+                            let ordersTableHTML = '';
+
+                            if (orders.length > 0) {
+                                orders.forEach((order, i) => {
+                                    ordersTableHTML += `<tr> <th>${i + 1}</th> <td>${order._id}</td> <td>${order.userId.name}</td> <td>${order.payment.amount}</td> <td>${order.payment.method}</td> <td>${order.status}</td> <td>${order.createdAt}</td> <td> <a class="text-white btn btn-light" href="/admin/loadOrderDetails?id=${order._id}">view Details</a><br> <br> <form action="/admin/updateStatus" method="post"> <select name="status" class="browser-default custom-select"> <option>${order.status}</option> <option>cancelled</option> <option>Delivered</option> <option>Shipped</option> <option>packed</option> </select> <input type="hidden" name="orderId" value="${order._id}"> ${order.status !== 'returned' ? '<button style="background-color: darkcyan;" type="submit">update</button>' : ''} </form> </td> </tr> `;
+                                });
+                            } else {
+                                ordersTableHTML = '<tr><td colspan="5">Products Not Found</td></tr>';
+                            }
+                            document.getElementById("tbody").innerHTML = ordersTableHTML;
+                        }
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
+            }
+
+
+
+
+        </script>
+
+        <%- include ('../layouts/adminFooter.ejs') %>

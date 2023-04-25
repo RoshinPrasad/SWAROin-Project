@@ -1,0 +1,165 @@
+<%- include ('../layouts/adminHeader.ejs') %>
+
+
+
+
+    <h4 class="text-center text-success my-5"> Edit Product</h4>
+    <h5 style="color: red;" class="text-center"><%-message%></h5>
+
+    <form action="/admin/edit-product?id=<%-products._id%>" style="margin-left: 15%;width: 50%;" class="" method="post"
+      enctype="multipart/form-data">
+      <fieldset>
+
+
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="product_name">Name</label>
+          <br>
+          <input id="product_name" name="pName" placeholder="Name" class="form-control input-md highlight" required=""
+            type="text" value="<%=products.name%>" required />
+
+          <!-- Text input-->
+          <label class="col-md-4 control-label" for="product_name">Stock</label>
+          <br>
+          <input id="product_name" name="pStock" placeholder="Stock" class="form-control input-md highlight" required=""
+            type="number" value="<%=products.stock%>" required />
+
+          <label class="col-md-4 control-label" for="product_name">Category</label>
+          <br>
+          <select class="form-select border-white" id="exampleFormControlSelect1" aria-label="Default select example"
+            aria-placeholder="" name="pCategory">
+            <option disabled selected>select any category</option>
+            <% if(category){ %>
+              <% for(let i=1;i <=category.length; i++){ %>
+                <option value="<%= category[i-1].name %>">
+                  <%= category[i-1].name %>
+                </option>
+                <% } %>
+                  <% }else{ %>
+                    <h1>No Categories to add</h1>
+                    <% } %>
+          </select>
+
+
+          <!-- Text input-->
+          <label class="col-md-4 control-label" for="product_name">Description</label>
+          <br>
+          <input id="product_name" name="pDescription" placeholder="Enter Description"
+            class="form-control input-md highlight" required="" type="text" value="<%=products.description%>"
+            required />
+
+
+          <!-- Text input-->
+          <label class="col-md-4 control-label" for="product_name">Price</label>
+          <br>
+          <input id="product_name" name="pPrice" placeholder="Enter the Price" class="form-control input-md highlight"
+            required="" type="number" value="<%=products.price%>" required />
+
+          <!-- Text input-->
+          <label class="col-md-4 control-label" for="product_name">Rating</label>
+          <br>
+          <input id="product_name" name="pRating" placeholder="Mark your rating" class="form-control input-md highlight"
+            required="" type="number" value="<%=products.rating%>" max="5" required />
+
+
+          <!-- File Button -->
+          <label for="filebutton">Choose image</label>
+          <br>
+          <div class="d-flex mb-2 mt-2">
+            <% for(let key of products.image){ %>
+              <div id='<%=key %>' style="padding-right: 4px; ">
+                <div class="d-flex align-items-center justify-content-center position-relative "
+                  style="border: 1px solid rgb(236, 236, 236);border-radius: 8px;height: 85px;width: 78px;">
+                  <button style="color: aliceblue;" type="button" onclick="cut('<%=key%>')"
+                    class="close position-absolute z-3 top-0 end-0 bg-transparent shadow-none " aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  <img src="/uploads/<%=key %>" class="img-thumbnail rounded" width="60px" height="60px"
+                    style="border: 4px;" alt="error">
+                </div>
+              </div>
+              <%}%>
+          </div>
+          <input id="filebutton" name="pImage" class="input-file" type="file" id="image" multiple accept="image/*" />
+
+<br>
+&ensp;
+          <!-- Button -->
+          <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+            <input type="hidden" value="<%=products._id%>" id="pId" />
+            
+            <button type="submit" value="Register" class="btn btn-success btn-lg">Save</button>&ensp;
+            <a href="/admin/product" class="btn btn-danger btn-lg">Go Back</a>
+          </div>
+      </fieldset>
+    </form>
+
+
+
+
+
+    <style>
+      .highlight {
+        border-color: aliceblue;
+        margin-top: 2%;
+        margin-bottom: 2%;
+
+      }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+
+      function cut(id) {
+        const swalWithBootstrapButtons = Swal.mixin({
+          customClass: {
+            confirmButton: 'btn btn-success',
+            cancelButton: 'btn btn-danger'
+          },
+          buttonsStyling: false
+        })
+
+        swalWithBootstrapButtons.fire({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Yes, delete it!',
+          cancelButtonText: 'No, cancel!',
+          reverseButtons: true
+        }).then((result) => {
+          if (result.isConfirmed) {
+            pId = document.getElementById('pId').value
+            document.getElementById(id).innerHTML = ''
+            const data = { img: id, pId: pId }
+            console.log(id, pId);
+            axios.post('/admin/updateImage', data)
+              .then(res => {
+                if (res.data) {
+                  console.log(res.data);
+
+                }
+              })
+              .catch(error => {
+                console.log(error);
+              })
+            console.log('This was logged in the callback: ' + result);
+            swalWithBootstrapButtons.fire(
+              'Deleted!',
+              'Your file has been deleted.',
+              'success'
+            )
+          } else if (
+            /* Read more about handling dismissals below */
+            result.dismiss === Swal.DismissReason.cancel
+          ) {
+            swalWithBootstrapButtons.fire(
+              'Cancelled',
+              'Your file is not deleted :)',
+              'error'
+            )
+          }
+        })
+      }
+
+    </script>
+    <%- include ('../layouts/adminFooter.ejs') %>

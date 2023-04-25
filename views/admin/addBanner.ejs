@@ -1,0 +1,60 @@
+<%- include ('../layouts/adminHeader.ejs') %>
+
+
+
+        <h4 class="text-center text-success my-5">Add Banner</h4>
+        <h3 style="color: red;text-align: center;">
+            <%=message%>
+        </h3>
+        <form action="/admin/add-Banners" method="post" style="margin-left: 15%;width: 50%;"
+            enctype="multipart/form-data">
+            <fieldset>
+                <!-- Text input-->
+
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="product_name">Name</label>
+                    <br>
+                    <input id="product_name" name="bName" placeholder="Name" class="form-control input-md highlight"
+                        required="" type="text">
+
+                    <!-- Text input-->
+                    <label class="col-md-4 control-label" for="product_name">Description</label>
+                    <br>
+                    <input id="product_name" name="bDescription" placeholder="Enter Description"
+                        class="form-control input-md highlight" required="" type="text">
+
+                    <!-- File Button -->
+                    <label for="filebutton">Choose image</label>
+                    <br>
+                    <input id="filebutton" name="bImage" class="input-file" type="file" required multiple>
+
+
+                    <!-- Button -->
+                    <div style="margin-left: 25%;" class="my-3">
+                        <button type="submit" id="singlebutton" name="singlebutton"
+                            class="btn btn-success">+Add</button>
+                        <a href="/admin/banner"><button type="button" id="singlebutton" name="singlebutton"
+                                class="btn btn-outline-light mx-3">Go back</button></a>
+                    </div>
+
+            </fieldset>
+        </form>
+
+
+
+
+        <style>
+            .highlight {
+                border-color: aliceblue;
+                margin-top: 2%;
+                margin-bottom: 2%;
+            }
+        </style>
+
+
+
+
+
+        <%- include ('../layouts/adminFooter.ejs') %>

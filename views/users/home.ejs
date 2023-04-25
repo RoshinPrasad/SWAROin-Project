@@ -1,0 +1,312 @@
+
+
+
+<%- include('../layouts/header.ejs') %>
+
+    <!-- Modal -->
+   
+
+    <div class="page" style="background-color: black;">
+
+    <!-- Start Banner Hero -->
+    
+
+    <% if(banner) {%>       
+        <div id="template-mo-zay-hero-carousel" class="carousel slide" data-bs-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="0" class="active"></li>
+                <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="1"></li>
+                <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="container">
+                        <div class="row p-5">
+                            <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
+                                <img class="img-fluid" src="/uploads/<%=banner.image[0]%>" alt="">
+                            </div>
+                            <div class="col-lg-6 mb-0 d-flex align-items-center">
+                                <div class="text-align-left align-self-center">
+                                    <h1 class="h1 text-success"><b>SeasonSale</b>FashionKart</h1>
+                                    <h3 class="h2">One dress, endless possibilities. From flirty minis to dramatic maxis, dive into the collection
+                                        of our most versatile dresses yet.</h3>
+                                     <p><%=banner.description%></p>
+                                     <a class="btn btn-outline-light btn-success py-2 px-4 mt-3 animate__animated animate__fadeInUp"
+                                            href="/loadShop">Shop Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% for(i=1;i<=banner.image.length;i++){%>
+                <div class="carousel-item">
+                    <div class="container">
+                        <div class="row p-5">
+                            <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
+                                <img class="img-fluid" src="/uploads/<%=banner.image[i]%>" alt="">
+                            </div>
+                            <div class="col-lg-6 mb-0 d-flex align-items-center">
+                                <div class="text-align-left">
+                                     <h1 class="h1 text-success"><b>New Arrivals </b> </h1>
+                                    <h3 class="h2">Prominent Collections</h3>
+                                    <p><%=banner.description%></p>
+                                    <a class="btn btn-outline-light btn-success py-2 px-4 mt-3 animate__animated animate__fadeInUp"
+                                            href="/loadShop">Shop Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="container">
+                        <div class="row p-5">
+                            <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
+                                <img class="img-fluid" src="/uploads/<%=banner.image[i+1]%>" alt="">
+                            </div>
+                            <div class="col-lg-6 mb-0 d-flex align-items-center">
+                                <div class="text-align-left">
+                                     <h1 class="h1 text-success"><b>STAY FIT</b> Women's Store</h1>
+                                    <h3 class="h2">Clear your mind of "I Can't"</h3>
+                                    <p><%=banner.description%></p>
+                                    <a class="btn btn-outline-light btn-success py-2 px-4 mt-3 animate__animated animate__fadeInUp"
+                                            href="/loadShop">Shop Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev text-decoration-none w-auto ps-3" href="#template-mo-zay-hero-carousel" role="button" data-bs-slide="prev">
+                <i class="fas fa-chevron-left"></i>
+            </a>
+            <a class="carousel-control-next text-decoration-none w-auto pe-3" href="#template-mo-zay-hero-carousel" role="button" data-bs-slide="next">
+                <i class="fas fa-chevron-right"></i>
+            </a>
+        </div>
+        <% } }
+                             else { %>
+                                <div id="template-mo-zay-hero-carousel" class="carousel slide" data-bs-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="0" class="active"></li>
+                <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="1"></li>
+                <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="container">
+                        <div class="row p-5">
+                            <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
+                                <img class="img-fluid" src="/assets/img/banner1.png" alt="">
+                            </div>
+                            <div class="col-lg-6 mb-0 d-flex align-items-center">
+                                <div class="text-align-left align-self-center">
+                                    <h1 class="h1 text-dark"><b>SWAROin Women's Paradise</b> </h1>
+                                    <h3 class="h2">New Season Destination</h3>
+                                    <p>
+                                        One dress, endless possibilities. From flirty minis to dramatic maxis, dive into the collection
+                                       of our most versatile dresses yet. 
+                                    </p>
+                                    <a class="btn btn-outline-light  btn-success py-2 px-4 mt-3 animate__animated animate__fadeInUp"
+                                            href="/loadShop">Shop Now</a>
+                                   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="container">
+                        <div class="row p-5">
+                            <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
+                                <img class="img-fluid" src="./assets/img/banner2.png" alt="">
+                            </div>
+                            <div class="col-lg-6 mb-0 d-flex align-items-center">
+                                <div class="text-align-left">
+                                     <h1 class="h1 text-success"><b>New Arrivals</b> NowOrNever</h1>
+                                    <h3 class="h2">Prominent Collections</h3>
+                                    <p>
+                                        Shop our newest styles to keep you looking cute and warm for the rest of the season !
+                                        Which comes easy,<br>when SWAROin is involved. 
+                                    </p>
+                                    <a class="btn btn-outline-light btn-success py-2 px-4 mt-3 animate__animated animate__fadeInUp"
+                                            href="/loadShop">Explore More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="container">
+                        <div class="row p-5">
+                            <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
+                                <img class="img-fluid" src="./assets/img/banner3.png" alt="">
+                            </div>
+                            <div class="col-lg-6 mb-0 d-flex align-items-center">
+                                <div class="text-align-left">
+                                    <h1 class="h1 text-success"><b>STAY FiT</b> by Swaroin</h1>
+                                    <h3 class="h2">Clear your mind of "I Can't"</h3>
+                                    <p>
+                                        Sometimes getting dressed can feel like going into battle. 
+                                        Flexibility with yourself and your looks shows self confidence. You're willing to paint on your canvas with whatever comes from within you.
+                                      </p>
+                                    <a class="btn btn-outline-light btn-success py-2 px-4 mt-3 animate__animated animate__fadeInUp "
+                                            href="/loadShop">Shop Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev text-decoration-none w-auto ps-3" href="#template-mo-zay-hero-carousel" role="button" data-bs-slide="prev">
+                <i class="fas fa-chevron-left"></i>
+            </a>
+            <a class="carousel-control-next text-decoration-none w-auto pe-3" href="#template-mo-zay-hero-carousel" role="button" data-bs-slide="next">
+                <i class="fas fa-chevron-right"></i>
+            </a>
+        </div>
+                                <%}%>
+    
+    
+    
+    <!-- End Banner Hero -->
+
+    <section class="light" >
+        <div>
+          <span id="L">STAY</span>
+          <span id="I">AHEAD</span>
+          <span id="G">OF</span><br><br><br>
+          <span id="H">THE</span>
+          <span id="T">FASHION.</span><br><br><br><br><br>
+          <span id="F">"Fashion is the armor to survive the reality of everyday life."</span><br>
+          <span id="F">"Fashion should be a form of escapism, and not a form of imprisonment"</span>
+      
+      </div>
+      </section>
+
+
+
+    <!-- Start Categories of The Month -->
+    <section class="bg-secondary">
+        <div class="row text-center pt-3">
+            <div class="col-lg-6 m-auto">
+                <h1 class="h1">Categories of The Month</h1>
+                <p>
+                    “Fashion is not necessarily about labels. It’s not about brands. It’s about something else that comes from within you.” 
+                  </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-4  p-5 mt-3">
+                <a href="/loadShop?category=0"><img src="./assets/img/topwear.jpg" class=" img-fluid border"></a>
+                
+                    <a class="btn btn-outline-light btn-success py-2 px-4 mt-3 animate__animated animate__fadeInUp "
+                                            href="/loadShop?category=0">TOP WEARS</a>
+                
+            </div>
+            <div class="col-12 col-md-4 p-5 mt-3">
+                <a href="/loadShop?category=1"><img src="./assets/img/botomwear.jpg" class=" img-fluid border"></a>
+                
+                
+                <a class="btn btn-outline-light btn-success py-2 px-4 mt-3 animate__animated animate__fadeInUp "
+                                            href="/loadShop?category=1">BOTTOM WEARS</a>
+             
+            </div>
+            <div class="col-12 col-md-4 p-5 mt-3">
+                <a href="/loadShop?category=2"><img src="./assets/img/acessories.jpg" class=" img-fluid border"></a>
+                
+                
+                <a class="btn btn-container-fluid btn-outline-light btn-success py-2 px-4 mt-3 animate__animated animate__fadeInUp "
+                                            href="/loadShop?category=2">ACCESSORIES</a>
+                
+            </div>
+        </div>
+    </section>
+    <!-- End Categories of The Month -->
+
+
+
+    
+    <!-- Start Featured Product -->
+ <!-- Start Featured Product -->
+ <section class="bg-light">
+    <div class="container py-5">
+        <div class="row text-center py-3">
+            <div class="col-lg-6 m-auto">
+                <h1 class="h1"><b>Featured Product</b></h1>
+                
+            </div>
+        </div>
+
+
+
+
+        <div class="row">
+            <% for(i=0;i <product.length;i++){ %>
+                        <% if(product[i].review.length>=0){%>
+            <div class="col-12 col-md-4 mb-4">
+                <div class="card h-100">
+                    <a href="/view-details?id=<%=product[i]._id%>">
+                        <img src="/uploads/<%=product[i].image[0]%>" class="card-img-top" alt="...">
+                    </a>
+                    <div class="card-body">
+                        <ul class="list-unstyled d-flex justify-content-between">
+                            <!-- <li>
+                                <i class="text-warning fa fa-star"></i>
+                                <i class="text-warning fa fa-star"></i>
+                                <i class="text-warning fa fa-star"></i>
+                                <i class="text-muted fa fa-star"></i>
+                                <i class="text-muted fa fa-star"></i>
+                            </li> -->
+                            <li class="text-muted text-right">Rs <%=product[i].price%></li>
+                        </ul>
+                        <a href="/view-details?id=<%=product[i]._id%>" class="h2 text-decoration-none text-dark"><%=product[i].name%></a>
+                        <p class="card-text">
+                            <%=product[i].description%>                            </p>
+                        
+                                                    <a href="/addWishlist?id=<%=product[i]._id%>"> <button class="btn btn-secondary px-3"><i
+                                                        class="fa fa-Wishlist mr-1"></i> Add To
+                                                    Wishlist</button></a>
+                                                    <a href="/addToCart?id=<%=product[i]._id%>"> <button class="btn btn-primary px-3"><i
+                                                        class="fa fa-shopping-cart mr-1"></i> Add To
+                                                    Cart</button></a>
+                    </div>
+                </div>
+            </div>
+
+            <%}}%>
+
+            
+        </div>
+    </div>
+</section>
+<!-- End Featured Product -->
+    
+
+    <section id="about" class="bg-secondary">
+    <div class="container" data-aos="fade-up"><br>
+
+      <div class="row">
+        <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left" data-aos-delay="100">
+          <img src="/assets/img/women.jpg" class="img-fluid" alt="">
+        </div>
+        <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content" data-aos="fade-right" data-aos-delay="100">
+          <h3>SWAROin where Fashion meets Soul</h3>
+          <p class="fst-italic">
+            How can you live the high life if you do not wear the high heels?
+          </p>
+          <ul>
+            <li><i class="ri-check-double-line"></i> Select Yours</select>.</li>
+            <li><i class="ri-check-double-line"></i> Wide Blend of Choices</li>
+            <li><i class="ri-check-double-line"></i> Live the Dream</li>
+          </ul>
+          <p>
+            <a class="abot" href="#">About</a>
+          </p>
+        </div>
+      </div><br>
+
+    </div>
+  </section>
+
+    <%- include('../layouts/footer.ejs') %>
+    </div>

@@ -1,0 +1,62 @@
+<%- include ('../layouts/header.ejs') %>
+
+
+
+
+
+
+
+
+<br>
+    <section class=" p-t-40 p-b-116">
+        <div class="container">
+            <div class="flex-w flex-tr">
+                <div class="size-210 bor10 p-lr-70 p-t-20 p-b-70 p-lr-15-lg w-full-md">
+
+                    <form action="/editUser" method="post" class="bg-light rounded-5 p-4">
+
+                        <h4 class="mtext-105 cl2 txt-center p-b-30">
+                            Update Details
+                        </h4>
+
+                        <label>Name *</label>
+                        <input type="text" class="form-control" placeholder="name" name="name" value="<%=user.name%>"
+                            required>
+
+
+
+                        <label>Email</label>
+                        <input type="text" class="form-control" placeholder="enter email" name="email"
+                            value="<%=user.email%>" required>
+
+
+                        <label>Email</label>
+                        <input type="number" class="form-control" placeholder="enter phone number" name="number"
+                            value="<%=user.mobile%>" required>
+                        <br>
+                        <br>
+                        <div class="d-flex justify-content-center mx-4 mb-5 mb-lg-4">
+                            <input type="hidden" name="id" value="<%=user._id%>">
+                            <button type="submit" value="" class="btn btn-primary btn-lg">Save</button>&ensp;
+                            <a href="userProfile" class="btn btn-primary ml-2 btn-lg">Go Back</a>
+                        </div>
+                    </form>
+    </section>
+
+
+
+<br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <%- include ('../layouts/footer.ejs') %>

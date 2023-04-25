@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OTP Verification</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <!-- Font Awesome icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <!-- Custom styles -->
+  <style>
+    body {
+     
+      color: #fff;
+    }
+
+    .card {
+      margin-top: 30%;
+      border-radius: 25px;
+      background-color: rgba(255, 255, 255, 0.05);
+      box-shadow: 0px 0px 20px #000;
+    }
+
+    .card-header {
+      background-color: rgba(255, 255, 255, 0.05);
+      border-bottom: none;
+    }
+
+    .card-footer {
+      background-color: rgba(255, 255, 255, 0.05);
+      border-top: none;
+    }
+
+    .form-control {
+      background-color: rgba(255, 255, 255, 0.05);
+      border: none;
+      border-radius: 25px;
+      color: #32ce6e;
+    }
+
+    .form-control:focus {
+      box-shadow: none;
+    }
+
+    .btn {
+      border-radius: 25px;
+    }
+
+    .btn-info {
+      background-color: #17a2b8;
+      border-color: #17a2b8;
+    }
+
+    .btn-info:hover {
+      background-color: #138496;
+      border-color: #138496;
+    }
+
+    .btn-warning {
+      background-color: #ffc107;
+      border-color: #ffc107;
+    }
+
+    .btn-warning:hover {
+      background-color: #ffa500;
+      border-color: #ffa500;
+    }
+
+    #timer {
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container my-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header text-center">
+            <h1 class="fw-bold mb-0"><span class="text-info">OTP</span> Verification</h1>
+          </div>
+          <div class="card-body">
+            <form id="otpForm" action="/otpPage" method="post">
+              <input id="oldotp" type="hidden" name="sendotp" value="<%-otp%>">
+              <div class="mb-3">
+                <label for="otpInput" class="form-label">OTP</label>
+                <div class="input-group">
+                  <span class="input-group-text"><i class="fas fa-key"></i></span>
+                  <input type="number" class="form-control" id="otpInput" name="otp" required>
+                  <span id="timer" style="display: none;"></span>
+                  <input type="hidden" name="mobilenumber" value="<%-mobno%>">
+                  <button type="button" class="btn btn-dark ms-2" id="resendBtn"
+                    onclick="startTimer(60);">Resend</button>
+                </div>
+                <span class="form-text text-muted" id="timer"></span>
+              </div>
+              <div class="d-grid">
+                <button type="submit" class="btn btn-warning">Register</button>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    var timerInterval;
+    var timeout;
+
+    (function () {
+      var timer = document.getElementById("timer");
+      var button = document.getElementById("resendBtn");
+      timer.style.display = "inline-block";
+      button.style.display = "none";
+      var seconds = 60;
+      timer.innerHTML = seconds + " seconds remaining";
+      timerInterval = setInterval(function () {
+        seconds--;
+        if (seconds <= 0) {
+          clearInterval(timerInterval);
+          timer.style.display = "none";
+          button.style.display = "inline-block";
+          timeout = setTimeout(function () {
+            button.style.display = "none";
+          }, 10000);
+        } else {
+          timer.innerHTML = seconds + " seconds remaining";
+        }
+      }, 1000);
+    })()
+
+    function startTimer(duration) {
+      console.log('<%=mobno%>');
+    
+      $.ajax({
+        url: '/againotp',
+        type: 'POST',
+        data: { phonenumber: '<%=mobno%>' },
+        success: function (data) {
+          document.getElementById("oldotp").value = data.newOtp;
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          console.log(textStatus, errorThrown);
+        }
+      })
+      var timer = document.getElementById("timer");
+      var button = document.getElementById("resendBtn");
+      timer.style.display = "inline-block";
+      button.style.display = "none";
+      var seconds = duration;
+      timer.innerHTML = seconds + " seconds remaining";
+      timerInterval = setInterval(function () {
+        seconds--;
+        if (seconds <= 0) {
+          clearInterval(timerInterval);
+          timer.style.display = "none";
+          button.style.display = "inline-block";
+        } else {
+          timer.innerHTML = seconds + " seconds remaining";
+        }
+      }, 1000);
+    }
+
+    function stopTimer() {
+      clearInterval(timerInterval);
+      clearTimeout(timeout);
+      var timer = document.getElementById("timer");
+      var button = document.getElementById("resendBtn");
+      timer.style.display = "none";
+      button.style.display = "inline-block";
+    }
+  </script>
+
+
+  <!-- <script> var timerInterval; var timeout; window.onload = function() { startTimer(60); }; function startTimer(duration) { var timer = document.getElementById("timer"); var button = document.getElementById("resendBtn"); timer.style.display = "inline-block"; button.style.display = "none"; var seconds = duration; timer.innerHTML = " Resend in"+seconds+"s"; timerInterval = setInterval(function() { seconds--; if (seconds <= 0) { clearInterval(timerInterval); timer.style.display = "none"; button.style.display = "inline-block"; timeout = setTimeout(function() { button.style.display = "none"; }, 10000); } else { timer.innerHTML = " Resend in"+seconds+"s" } }, 1000); } function stopTimer() { clearInterval(timerInterval); clearTimeout(timeout); var timer = document.getElementById("timer"); var button = document.getElementById("resendBtn"); timer.style.display = "none"; button.style.display = "inline-block"; } </script> -->
+
+
+  <span id="timer" style="display: none;"></span>
+  <button type="button" class="btn btn-info ms-2" id="resendBtn" style="display: none;"
+    onclick="startTimer(60);">Resend</button>
+
+  <script>
+
+
+
+  </script>
+  <!-- jQuery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-lJp5cLb9Xvgz+xMzj5Yh0aGvN2ZNT5O5N5K0rkp8hX1Xy/5C5jKfzLW6mJU6oKj4"
+    crossorigin="anonymous"></script>
+  </head>
+</body>
+
+</html>

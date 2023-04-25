@@ -1,0 +1,23 @@
+<%- include ('../layouts/adminHeader.ejs') %>
+
+   
+        <h4 class="text-center text-success my-5"> EDIT CATEGORIES</h4>
+        <h4 style="color: red;" class="text-center"><%-message%></h4>
+
+        <form action="/admin/edit-category" method="post">
+            <!-- Email input -->
+            <div class=" mb-4 ">
+                <input style="margin-left: 25%; margin-right: 30%;" type="text" id="addCategories" name="addCategory"
+                    class="form-control form-control-lg border-white w-50 h-10 " placeholder="Enter your category name"
+                    value="<%=category.name%>" required />
+                <span id="Email"></span>
+            </div>
+
+            <div style="display: flex; justify-content: space-between;">
+                <a style="margin-left: 40%;"><button type="submit" class="btn-success rounded-2 p-2">Save</button></a>
+        </form>
+        <a style="margin-right: 40%;" href="/admin/category"><button type="button"
+                class="btn-primary rounded-2 p-2">cancel</button></a>
+
+    </div>
+    <%- include ('../layouts/adminFooter.ejs') %>

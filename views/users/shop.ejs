@@ -1,0 +1,349 @@
+<%- include('../layouts/header.ejs') %>
+
+
+
+    <!-- Navbar Start -->
+
+    <style>
+        /* Style for the label */
+        .label {
+            text-align: center;
+            background-color: white;
+            padding: 10px;
+            display: inline-block;
+            margin-right: 10px;
+            font-weight: bold;
+            width: 35px;
+        }
+
+        /* Style for the radio button */
+        input[type="radio"] {
+            display: none;
+        }
+
+        /* Style for the label when the radio button is checked */
+        input[type="radio"]:checked+label {
+            color: #2196F3;
+        }
+
+
+
+        /* Style for the radio button circle */
+        input[type="radio"]+label::before {
+            content: "";
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+            border-radius: 50%;
+            border: 1px solid #ccc;
+            vertical-align: middle;
+            cursor: pointer;
+        }
+
+
+        /* Style for the radio button circle when checked */
+        input[type="radio"]:checked+label::before {
+            background-color: #2196F3;
+            border-color: #2196F3;
+        }
+
+
+
+        /* Accessibility styles for the radio button circle */
+        input[type="radio"]+label::before {
+            content: "";
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+            border-radius: 50%;
+            border: 1px solid #ccc;
+            vertical-align: middle;
+            cursor: pointer;
+        }
+
+
+        input[type="radio"]+label::before {
+            content: "";
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+            border-radius: 50%;
+            border: 1px solid #ccc;
+            vertical-align: middle;
+            cursor: pointer;
+        }
+
+
+        input[type="radio"]+label::before:focus,
+        input[type="radio"]+label::before:hover {
+            outline: none;
+            border-color: #2196F3;
+        }
+    </style>
+
+    
+    <!-- Breadcrumb Start -->
+    <br>
+    <div class="container-fluid">
+        <div class="row px-xl-5">
+            <div class="col-12">
+                <nav class="breadcrumb bg-light mb-30">
+                    <a class="breadcrumb-item text-dark" href="/home">Home</a>
+                    <a class="breadcrumb-item text-dark" href="/loadShop">Shop</a>
+                    <span class="breadcrumb-item active">Shop List</span>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <!-- Breadcrumb End -->
+
+
+    <!-- Shop Start -->
+    <div class="container-fluid">
+        <div class="row px-xl-5">
+            <!-- Shop Sidebar Start -->
+            <div class="col-lg-3 col-md-4">
+                <!-- Price Start -->
+                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-white pr-3">Filter
+                        by Category</span></h5>
+                <div class="bg-light p-4 mb-30">
+                    <form action="/loadShop">
+
+                        <!-- <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="category" id="flexRadioDefault2" value="" <%if(selected==''){%>checked<%}%>  onclick="submit()">
+                            <label class="form-check-label" for="flexRadioDefault2">
+                              All
+                            </label>
+                          </div>
+                    </div> -->
+
+                        <% for(i=0;i<category.length;i++){%>
+                            <div
+                                class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                                <div class="form-check">
+                                    <input class="category form-check-input" type="checkbox" value="<%-i%>"
+                                        name="category" onchange="update()" <% for(j=0; j< selected.length; j++) {
+                                        if(selected[j]==i) { %>checked<%}}%>/>
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                            <%-category[i].name %>
+                                        </label>
+                                </div>
+                            </div>
+                            <%}%>
+                </div>
+                <!-- Price End -->
+
+                <!-- <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by color</span></h5> -->
+                <div class="bg p-4 mb-30">
+                    
+                </div>
+            </div>
+            <!-- Shop Sidebar End -->
+
+
+            <!-- Shop Product Start -->
+            <div class="col-lg-9 col-md-8">
+                <div class="row pb-3">
+                    <div class="col-12 pb-1">
+                        <div class="d-flex align-items-center justify-content-between mb-4">
+                            <div>
+                                <button class="btn btn-sm btn-light"><i class="fa fa-th-large"></i></button>
+                                <button class="btn btn-sm btn-light ml-2"><i class="fa fa-bars"></i></button>
+                            </div>
+                            <div class="ml-2"><select class="select-box bg-white select-box--transparent-b-2"
+                                    name="limit" id="limit" onchange="update()">
+                                    <option value="12" <% if(limit==12) { %>selected<%}%>>Show: All</option>
+                                    <option value="3" <% if(limit==3) { %>selected<%}%>>Show: 3</option>
+                                    <option value="6" <% if(limit==6) { %>selected<%}%>>Show: 6</option>
+                                    <option value="9" <% if(limit==9) { %>selected<%}%>>Show: 9</option>
+                                </select></div>
+                            <div class="ml-2">
+                                <select class="select-box select-box--transparent-b-2" name="sort" id="sort"
+                                    onchange="update()">
+                                    <option value="0" <% if(order==0) { %>selected<%}%> >Sort By: Latest Arrivals
+                                    </option>
+                                    <option value="1" <% if(order==1) { %>selected<%}%> >Sort By: Lowest Price</option>
+                                    <option value="-1" <% if(order==-1) { %>selected<%}%> >Sort By: Highest Price
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="row pb-3" id="products">
+                    <% for(i=0;i<product.length;i++){ %>
+                <div class="col-12 col-md-4 mb-4">
+                    <div class="card h-100">
+                        <a href="/view-details?id=<%=product[i]._id%>">
+                            <img src="/uploads/<%=product[i].image[0]%>" class="card-img-top" alt="...">
+                        </a>
+                        <div class="card-body">
+                            <ul class="list-unstyled d-flex justify-content-between">
+                                <li>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-muted fa fa-star"></i>
+                                    <i class="text-muted fa fa-star"></i>
+                                </li>
+                                <li class="text-muted text-right">Rs <%=product[i].price%></li>
+                            </ul>
+                            <a href="/view-details?id=<%=product[i]._id%>" class="h2 text-decoration-none text-dark"><%=product[i].name%></a>
+                            <p class="card-text">
+                                <%=product[i].description%>
+                            </p>
+                            
+                    
+                                                       
+                        </div>
+                    </div>
+                </div>
+
+                <%}%>
+
+                
+            </div>
+
+
+
+
+
+                
+
+                <div class="row pb-3">
+                    <div class="col-12" id="pgnt" style="display: block;">
+                        <nav>
+                            <ul class="pagination justify-content-center">
+                                <% for(i=0;i<pageCount;i++){%>
+                                    <li class="page-item " id="<%-i%>"><a class="page-link"
+                                            onclick="updatePage('<%-i%>')"><%-i+1%></a></li>
+                                    <%}%>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <!-- Shop Product End --></form>
+        </div>
+    </div>
+    <!-- Shop End -->
+
+
+
+
+
+
+
+    <script>
+        console.log('itrufysvdmhg');
+        let page = 0
+        function updatePage(pg = 0) {
+            console.log('rtjhihughg');
+            page = pg
+            console.log(page);
+            pageNo = document.getElementsByClassName('page-item')
+            for (let key of pageNo) { key.classList.remove('active') }
+            document.getElementById(page).classList.add('active')
+            update()
+        }
+        function update() {
+            console.log('litugbh');
+            var elements = document.getElementsByClassName("category");
+            var limit = document.getElementById('limit').value
+            var sort = document.getElementById('sort').value
+            var search = document.getElementById('search').value
+            var arr = '';
+            for (var i = 0; i < elements.length; i++) {
+                if (elements[i].checked) {
+                    arr = [...arr, elements[i].value]
+                }
+            }
+            console.log(arr + '\n' + limit + '\n' + sort + '\n' + search + '\n' + page);
+            $.ajax({
+                url: '/loadShop',
+                type: 'GET',
+                data: { category: arr, limit: limit, sort: sort, search: search, page: page, ajax: true },
+                success: function (data) {
+                    console.log(data);
+                    if (data.pageCount == 1) {
+                        document.getElementById('pgnt').style.display = 'none';
+                    } else {
+                        document.getElementById('pgnt').style.display = 'block';
+                    }
+                    product = data.products
+                    document.getElementById('products').innerHTML = `
+    ${product.map((productItem) => `
+
+
+
+
+        <div class="col-12 col-md-4 mb-4">
+                    <div class="card h-100">
+                        <a href="/view-details?id=${productItem._id}">
+                            <img src="/uploads/${productItem.image[0]}" class="card-img-top" alt="...">
+                        </a>
+                        <div class="card-body">
+                            <ul class="list-unstyled d-flex justify-content-between">
+                                <li>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-muted fa fa-star"></i>
+                                    <i class="text-muted fa fa-star"></i>
+                                </li>
+                                <li class="text-muted text-right">Rs ${productItem.price}</li>
+                            </ul>
+                            <a href="/view-details?id=${productItem._id}" class="h2 text-decoration-none text-dark">${productItem.name}</a>
+                            <p class="card-text">
+                                <%=product[i].description%>
+                            </p>
+                            
+                                                        
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+    `).join('')}
+`;
+                    console.log(data.pageCount);
+                    if (data.pageCount > 1) {
+                        console.log('gte');
+                        document.getElementById('pgnt').innerHTML = `
+    <nav>
+        <ul class="pagination justify-content-center">
+            ${Array(data.pageCount).fill().map((_, index) => `
+                <li class="page-item pg" id="${index}">
+                    <a class="page-link" onclick="updatePage('${index}')">${index + 1}</a>
+                </li>
+            `).join('')}
+        </ul>
+    </nav>
+`;
+                    } else {
+                        if (data.page != 0) {
+                            updatePage()
+                        }
+                    }
+
+
+                }
+            });
+        }
+    </script>
+
+    <%- include('../layouts/footer.ejs') %>

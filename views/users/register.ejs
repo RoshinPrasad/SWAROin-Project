@@ -1,0 +1,95 @@
+<%- include('../layouts/header.ejs') %>
+  <link rel="stylesheet" href="css/register.css">
+  </section>
+  <section class="vh-40 form-container">
+    <div class="container py-2 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+          <div class="card shadow-2-strong" style="border-radius: 1rem;">
+            <div class="card-body p-5 text-center">
+              <h3 class="text-center text-dark mb-5">User Registration</h3>
+
+              <% if(typeof message !=='undefined' ) { %>
+                <p class="fs-4 text-success">
+                  <span style="color: rgb(230, 8, 8);">
+                    <%=message %>
+                  </span>
+                </p>
+                <% } %>
+
+                  <form action="/register" method="post" onsubmit="return validate()">
+                    <div class="form-outline mb-4 ">
+
+                      <input type="text" id="name" name="name" class="form-control form-control-md" placeholder="Name"
+                        onchange="nameValidate()" />
+                      <span id="Name"></span>
+                    </div>
+
+                    <!-- Email input -->
+                    <div class="form-outline mb-4">
+
+                      <input type="email" id="email" name="email" class="form-control form-control-md"
+                        placeholder="Email" onchange="emailValidate()" />
+                      <span id="Email"></span>
+                    </div>
+
+                    <div class="form-outline mb-4">
+
+                      <input type="text" id="number" name="mno" class="form-control form-control-md"
+                        placeholder="Mobile No" onchange="numberValidate()" />
+                      <span id="Number"></span>
+                    </div>
+
+                    <!-- Password input -->
+                    <div class="form-outline mb-4">
+
+                      <input type="password" name="password" id="password" placeholder="Password"
+                        class="form-control form-control-md" onchange="passwordValidate()" />
+                      <span id="Password"></span>
+                    </div>
+
+                    <div class="form-outline mb-4">
+
+                      <input type="password" name="password2" id="password2" placeholder="conform-Password"
+                        class="form-control form-control-md" onchange="passwordValidate2()" />
+                      <span id="Password2"></span>
+                    </div>
+                    <!-- 
+                  <div
+                    class="d-flex justify-content-around align-items-center mb-4"
+                  ></div> -->
+
+                    <!-- Submit button -->
+                    <div style="display: flex; justify-content: space-around;">
+                      <button class=" btn btn-block back_but" style="background-color:rgb(63, 208, 63);"><a href="/home"
+                          class="text-dark text-decoration-none"> Back</a></button>
+
+                      <button type="submit" class="btn btn-block reg_but" style="background-color:rgb(63, 208, 63);"
+                        value="Register"
+                        onclick="nameValidate() , emailValidate(), numberValidate(), passwordValidate(), passwordValidate2()">
+                        Register
+                      </button>
+                    </div>
+                    <!-- <div class="divider d-flex align-items-center my-4">
+                    <p class="text-center fw-bold mx-3 mb-0 text-muted"></p>
+                  </div> -->
+                  </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+  </section>
+  <!-- <section for="registraction">
+
+
+  </section> -->
+  <script src="validation.js"> </script>
+
+  <%- include('../layouts/footer.ejs') %>

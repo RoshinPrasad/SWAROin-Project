@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>SWAROin</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/templatemo.css">
+    <link rel="stylesheet" href="assets/css/custom.css">
+    <link rel="stylesheet" href="assets/css/style1.css">
+
+    <!-- Load fonts style after rendering the layout styles -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
+    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+    <link href="magiczoom/magiczoom.css" rel="stylesheet" type="text/css" media="screen" />
+
+    
+
+</head>
+
+<body>
+    
+    
+
+
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-light shadow" style="background-image: url('/assets/img/bg-reg4.jpg');">
+        <div class="container d-flex justify-content-between align-items-center">
+
+            <a class="navbar-brand text-success logo h2 align-self-center" href="/home">
+                SWARO<span style="color: blue;">in</span>
+            </a>
+
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            
+         
+
+
+            <div class="col-lg-4 col-6 text-left">
+                <form action="">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="search" id="search"
+                            onkeyup="update()">
+                        
+                    </div>
+                </form>
+            </div>
+
+
+            <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between" id="templatemo_main_nav">
+                <div class="flex-fill">
+                    <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/home">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/loadShop">Shop</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/loadWishlist">Wishlist</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/loadCart">Cart</a>
+                        </li>
+
+                        <% if (user) { %>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/userProfile">Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/logout">Logout</a>
+                            </li>
+                            <% } else { %>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/login">Login</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/register">Register</a>
+                                </li>
+                             
+                                <% }%>
+                             
+                                    
+                                   
+                                    
+                                   
+
+
+
+                                      
+                            
+                                   
+                    </ul>
+
+
+                    
+                    
+        
+
+
+
+                </div>
+                
+            </div>
+
+        </div>
+    </nav>
+    <!-- Close Header -->

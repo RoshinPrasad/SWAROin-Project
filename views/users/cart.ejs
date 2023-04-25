@@ -1,0 +1,279 @@
+<%- include ('../layouts/header.ejs') %>
+
+<br>
+    <!-- Breadcrumb Start -->
+    <div class="container-fluid">
+        <div class="row px-xl-5">
+            <div class="col-12">
+                <nav class="breadcrumb bg-light mb-30">
+                    <a class="breadcrumb-item text-dark" href="/home">Home</a>
+                    <span class="breadcrumb-item active">Shopping Cart</span>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+    <% if(cartProducts.item.length==0){%>
+        <style>
+            @import url(http://fonts.googleapis.com/css?family=Calibri:400,300,700);
+
+            /* body {
+
+                background-color: #000000;
+            }
+ */
+
+
+
+            .card {
+                margin-bottom: 100px;
+                background-color: transparent;
+                border: 0;
+                -webkit-transition: all .3s ease;
+                transition: all .3s ease;
+                letter-spacing: .5px;
+                border-radius: 8px;
+                -webkit-box-shadow: 1px 5px 24px 0 rgba(68, 102, 242, .05);
+                box-shadow: 1px 5px 24px 0 rgba(68, 102, 242, .05);
+            }
+
+            .card .card-header {
+                background-color: #000000;
+                border-bottom: none;
+                padding: 24px;
+                border-bottom: 1px solid #000000;
+                border-top-left-radius: 8px;
+                border-top-right-radius: 8px;
+            }
+
+            .card-header:first-child {
+                border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;
+            }
+
+
+            .card .card-body {
+                padding: 30px;
+                background-color: transparent;
+            }
+
+            .letter {
+                color: aliceblue;
+            }
+
+            .btnn {
+                text-align: center;
+                background-color: #cbb739 !important;
+                padding: 20px;
+                border-radius: 20px;
+                font-weight: 200;
+                color: rgb(0, 0, 0);
+            }
+        </style>
+        <div class="container-fluid">
+            
+            
+
+                                 <div class="d-flex justify-content-center mt-5 mb-5 ">
+                                        
+                                        
+                                        <lottie-player class="" src="https://assets9.lottiefiles.com/packages/lf20_qh5z2fdq.json"  background="transparent"  speed="1"  style="width: 350px; height: 350px;"  loop  autoplay>
+                                    </lottie-player>
+                                
+                                    
+                                </div>
+                                
+                                
+
+                            
+                      
+                   
+
+
+
+        </div>
+        <%}else{%>
+
+            <!-- Cart Start -->
+            <div class="container-fluid">
+                <div class="row px-xl-5">
+                    <div class="col-lg-8 table-responsive mb-5">
+                        <table class="table table-light table-borderless table-hover text-center mb-0">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>image</th>
+                                    <th>Name</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                    <th>Remove</th>
+                                </tr>
+                            </thead>
+                            <tbody class="align-middle">
+                                <% for(let i=0;i<cartProducts.item.length;i++){ %>
+
+                                    <tr>
+                                        <td class="align-middle"><a
+                                                href="/view-details?id=<%=cartProducts.item[i].productId._id%>"><img
+                                                    src="/uploads/<%=cartProducts.item[i].productId.image[0]%>" alt=""
+                                                    style="width: 50px;"></a></td>
+                                        <td class="align-middle">
+                                            <%=cartProducts.item[i].productId.name%>
+                                        </td>
+                                        <td id="price" class="align-middle">
+                                            <%=cartProducts.item[i].productId.price%>
+                                        </td>
+                                        <td class="align-middle ">
+
+
+                                            <div class="d-flex  ms-4" style="max-width: 160px; margin-left: 20%;">
+                                                <button class=" button hollow circle btn-primary" style="height: 38px;"
+                                                    onclick="update('<%= cartProducts.item[i].productId._id %>',0,'<%=i%>')">
+                                                    <i class="fas fa-minus"></i>
+                                                </button>
+
+                                                <div class="form-outline" style=" width: 150px;">
+                                                    <input min="1" name="quantity" style="text-align: center;"
+                                                        value="<%=cartProducts.item[i].qty%>" type="number" disabled
+                                                        class="form-control"
+                                                        id='<%=cartProducts.item[i].productId._id %>' />
+
+                                                </div>
+                                                <button class="button hollow circle btn-primary" style="height: 38px;"
+                                                    onclick="update('<%= cartProducts.item[i].productId._id %>','<%-cartProducts.item[i].productId.stock%>','<%=i%>')">
+
+                                                    <i class="fas fa-plus"></i>
+                                                </button>
+                                            </div>
+
+                                        </td>
+                                        <td id="<%=i%>" class="align-middle">
+                                            <%=cartProducts.item[i].productId.price*cartProducts.item[i].qty%>
+                                        </td>
+                                        <td class="align-middle"><a
+                                                href="/delete-cart?id=<%= cartProducts.item[i].productId._id %>"><button
+                                                    class="btn btn-sm btn-danger"><i
+                                                        class="fa fa-times"></i></button></a></td>
+                                    </tr>
+                                    <% }%>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-lg-4">
+
+                        <h5 class="section-title position-relative text-uppercase mb-3"><span
+                                class="bg-white pr-3">Cart Summary</span></h5>
+                        <div class=" p-30 mb-5">
+                            <div class="pt-2">
+                                <div class="d-flex justify-content-between mt-2">
+                                    <h5>Total</h5>
+                                    <h5 id="total">Rs <%=cartProducts.totalPrice%>
+                                    </h5>
+                                </div>
+
+                                <a href="<%if(cartProducts.totalPrice==0){%>/loadCart<%}else{%>/loadCheckout<%}%>"><button
+                                        class="btn btn-block btn-primary font-weight-bold my-3 py-3">Proceed To
+                                        Checkout</button></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <%}%>
+                <!-- Cart End -->
+                
+
+                <!-- Back to Top -->
+
+
+                <script>
+                    jQuery(document).ready(function () {
+                        // This button will increment the value
+                        $('[data-quantity="plus"]').click(function (e) {
+                            // Stop acting like a button
+                            e.preventDefault();
+                            // Get the field name
+                            fieldName = $(this).attr('data-field');
+                            // Get its current value
+                            Val = $('input[name=' + fieldName + ']').val()
+                            console.log(Val);
+                            var values = Val.split(',')
+                            var currentVal = parseInt(values[0])
+                            var stock = parseInt(values[1])
+                            console.log(currentVal, stock);
+                            // If is not undefined
+                            if (!isNaN(currentVal)) {
+                                // Increment
+                                if (currentVal == stock) {
+
+                                } else {
+                                    $('input[name=' + fieldName + ']').val(currentVal + 1);
+                                }
+                            } else {
+                                // Otherwise put a 0 there
+                                $('input[name=' + fieldName + ']').val(0);
+                            }
+                        });
+                        // This button will decrement the value till 0
+                        $('[data-quantity="minus"]').click(function (e) {
+                            // Stop acting like a button
+                            e.preventDefault();
+                            // Get the field name
+                            fieldName = $(this).attr('data-field');
+                            // Get its current value
+                            Val = $('input[name=' + fieldName + ']').val()
+                            console.log(Val);
+                            var values = Val.split(',')
+                            var currentVal = parseInt(values[0])
+                            // If it isn't undefined or its greater than 0
+                            if (!isNaN(currentVal) && currentVal > 1) {
+                                // Decrement one
+                                $('input[name=' + fieldName + ']').val(currentVal - 1);
+                            } else {
+                                // Otherwise put a 0 there
+                                $('input[name=' + fieldName + ']').val(1);
+                            }
+                        });
+                    });
+
+                    function update(id, plus, amt) {
+
+                        currentqty = document.getElementById(id)
+                        console.log(plus, amt);
+                        if (plus) {
+                            if (currentqty.value < parseInt(plus)) {
+                                currentqty.parentNode.querySelector('input[type=number]').stepUp();
+                            }
+                        } else {
+                            currentqty.parentNode.querySelector('input[type=number]').stepDown()
+                        }
+                        setTimeout(() => {
+                            console.log("currrent====" + currentqty.value);
+                            console.log('qty==' + currentqty.value);
+                            let qty = document.getElementById(id).value;
+                            console.log(currentqty.value, plus);
+                            if (currentqty.value == plus && currentqty.value == 0) {
+                                console.log(currentqty.value, plus);
+                            } else {
+
+                                $.ajax({
+                                    url: '/updateCart',
+                                    type: 'POST',
+                                    data: { quantity: qty, _id: id },
+                                    success: function (data) {
+                                        console.log(data.test);
+                                        document.getElementById("total").innerHTML = "Rs " + data.test;
+                                        console.log(data.test);
+                                        console.log(qty * data.price);
+                                        console.log(amt);
+                                        document.getElementById(amt).innerHTML = qty * data.price;
+                                    },
+                                    error: function (jqXHR, textStatus, errorThrown) {
+                                        console.log(textStatus, errorThrown);
+                                    }
+                                })
+                            }
+                        }, 50);
+                    }
+                </script>
+                <%- include ('../layouts/footer.ejs') %>

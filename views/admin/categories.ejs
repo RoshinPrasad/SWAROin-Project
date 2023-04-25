@@ -1,0 +1,81 @@
+<%- include ('../layouts/adminHeader.ejs') %>
+
+
+
+    <h4 class="text-center text-success my-5">CATEGORIES</h4>
+    <a href="/admin/addCategories"><button type="button" class="btn btn-primary mx-3">+ Add Categories</button></a>
+
+
+
+    <table class="table text-center">
+      <thead>
+        <tr>
+          <th scope="col">SL NO</th>
+          <th scope="col">CATEGORY NAME</th>
+          <th scope="col">ACTIONS</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <% for(i=1;i<=category.length;i++){ %>
+          <tr>
+            <td>
+              <%=i%>
+            </td>
+            <td><%=category[i-1].name%></td>
+            <td>
+              <a href="/admin/edit-category?id=<%- category[i-1]._id %>"><button type="button"
+                  class="btn btn-success">edit</button></a>
+              <!-- <button class="btn  btn-outline-danger" data-toggle="modal" data-target="#exampleModalCenter"
+                    onclick="del('<%- category[i-1]._id %>')"></button> -->
+              <a id="<%-category[i-1]._id %>" style="text-decoration: none; color: #d15858;"
+                href="/admin/delete-category?id=<%- category[i-1]._id %>">
+                <% if(category[i-1].is_available){ %>Unlist<%}else{%>list<%}%>
+              </a>
+            </td>
+          </tr>
+          <%}%>
+      </tbody>
+    </table>
+
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Confirm Delete</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Are you sure want to delete ?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">cancel</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="save()">delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+      crossorigin="anonymous"></script>
+    <script>
+          // var val
+          // function del(value) {
+          //     val = value
+          //     console.log(val);
+          // }
+          // function save() {
+          //     document.getElementById(val).click()
+          //     console.log(`true ${val}`);
+          // }
+
+    </script>
+
+    <%- include ('../layouts/adminFooter.ejs') %>

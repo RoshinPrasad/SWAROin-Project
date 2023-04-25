@@ -1,0 +1,92 @@
+<%- include ('../layouts/adminHeader.ejs') %>
+
+ 
+    <h4 class="text-center my-5 text-success">BANNER MANAGEMENT</h4>
+
+    <a href="/admin/add-Banners"><button type="button" class="btn btn-primary mx-3">+ Add Banners</button></a>
+
+    <table class="table text-center">
+      <thead>
+        <tr>
+          <th scope="col">SL NO</th>
+          <th scope="col">BANNER NAME</th>
+          <th scope="col">IMAGE</th>
+          <th scope="col">DESCRIPTION</th>
+          <th scope="col">EDIT&HIDE</th>
+
+        </tr>
+      </thead>
+      <tbody>
+
+        <% for(i=1;i<=banner.length;i++){ %>
+          <tr>
+            <td>
+              <%=i%>
+            </td>
+            <td><%=banner[i-1].name%></td>
+            <td>
+
+              <% if(banner[i-1].image) { %>
+                <img src="/uploads/<%= banner[i-1].image[0] %>" width="100px" height="100px">
+                <img src="/uploads/<%= banner[i-1].image[1] %>" width="100px" height="100px">
+                <img src="/uploads/<%= banner[i-1].image[2] %>" width="100px" height="100px">
+                <% }else{ %>
+                  Image Not Found
+                  <% } %>
+            </td>
+            <td><%=banner[i-1].description%></td>
+            <td>
+              <a href="/admin/edit-banner?id=<%- banner[i-1]._id %>"><button type="button"
+                  class="btn btn-success">edit</button></a>
+              <a id="<%-banner[i-1]._id %>" style="text-decoration: none; color: #ec7676;"
+                href="/admin/hide-banner?id=<%- banner[i-1]._id %>">
+                <% if(banner[i-1].is_active){ %>disable<%}else{%>enable<%}%>
+              </a>
+            </td>
+          </tr>
+          <%}%>
+      </tbody>
+    </table>
+
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Confirm Delete</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Are you sure want to delete ?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">cancel</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="save()">delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+      crossorigin="anonymous"></script>
+    <script>
+          // var val
+          // function del(value) {
+          //     val = value
+          //     console.log(val);
+          // }
+          // function save() {
+          //     document.getElementById(val).click()
+          //     console.log(`true ${val}`);
+          // }
+
+    </script>
+
+
+    <%- include ('../layouts/adminFooter.ejs') %>

@@ -1,0 +1,111 @@
+<%- include ('../layouts/header.ejs') %>
+
+
+
+
+
+
+
+
+
+    <section class="bg0 p-t-40 p-b-116">
+        <div class="container">
+            <div class="flex-w flex-tr">
+                <div class="size-210 bor10 p-lr-70 p-t-20 p-b-70 p-lr-15-lg w-full-md">
+
+                    <form action="/editcheckout-address" method="post" class="bg-light rounded-5 p-4">
+
+                        <h4 class="mtext-105 cl2 txt-center p-b-30">
+                            ADD ADDRESS
+                        </h4>
+
+                        <!-- <div class="bor8 m-b-20 how-pos4-parent">
+                                <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="email" placeholder="Your Email Address">
+                                <img class="how-pos4 pointer-none" src="images/icons/icon-email.png" alt="ICON">
+                            </div>
+    
+                            <div class="bor8 m-b-30">
+                                <textarea class="stext-111 cl2 plh3 size-120 p-lr-28 p-tb-25" name="msg" placeholder="How Can We Help?"></textarea>
+                            </div>  -->
+
+                        <label>Name *</label>
+                        <input type="text" class="form-control" name="firstname" placeholder="First name"
+                            value="<%=address.firstname%>" required>
+
+                        <label>Last Name *</label>
+                        <input type="text" class="form-control" name="lastname" placeholder="Last name"
+                            value="<%=address.lastname%>" required>
+
+
+
+                        <label>Country *</label>
+                        <input type="text" class="form-control" name="country" placeholder="Country"
+                            value="<%=address.country%>" required>
+
+                        <label>address *</label>
+                        <input type="text" class="form-control" placeholder="Address" name="address"
+                            value="<%=address.address%>" required>
+
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label>Town / City *</label>
+                                <input type="text" class="form-control" name="city" placeholder="City"
+                                    value="<%=address.city%>" required>
+                            </div><!-- End .col-sm-6 -->
+
+                            <div class="col-sm-6">
+                                <label>State / County *</label>
+                                <input type="text" class="form-control" name="state" placeholder="State"
+                                    value="<%=address.state%>" required>
+                            </div><!-- End .col-sm-6 -->
+                        </div><!-- End .row -->
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label>Postcode / ZIP *</label>
+                                <input type="text" class="form-control" name="zip" placeholder="Postcode/ZIP"
+                                    value="<%=address.zip%>" required>
+                            </div><!-- End .col-sm-6 -->
+
+                            <div class="col-sm-6">
+                                <label>Phone *</label>
+                                <input type="tel" class="form-control" name="mno" placeholder="Phone"
+                                    value="<%=address.mobile%>" required>
+                            </div><!-- End .col-sm-6 -->
+                        </div><!-- End .row -->
+
+                        <!-- <button type="submit" class="btn btn-outline-primary-2">
+                               <span>Update</span>
+                               <i class="icon-long-arrow-right"></i>
+                           </button> -->
+                        <!-- <a href="/dashboard" class="btn btn-outline-primary-2"><span>GO BACK</span><i class="icon-long-arrow-right"></i></a>
+                            </div> -->
+                        <!-- End .col-lg-9 -->
+                        <br>
+                        <div class="d-flex justify-content-center mx-4 mb-5 mb-lg-4">
+                            <input type="hidden" name="id" value="<%=address._id%>">
+                            <button type="submit" value="" class="btn btn-primary btn-lg">Save </button>
+                            &ensp;
+                            <a href="loadCheckout" class="btn btn-primary ml-2 btn-lg">Go Back</a>
+                        </div>
+                    </form>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <%- include ('../layouts/footer.ejs') %>

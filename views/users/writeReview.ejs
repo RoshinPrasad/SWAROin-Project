@@ -1,0 +1,67 @@
+<%- include('../layouts/header.ejs') %>
+
+<br>
+<br>
+
+<div class="container" style="max-width:800px;">
+  <p class="text-dark">Dear,<span class="fs-5 text-light"></span name="user">
+    <%=user%></span><span class="text-light fs-6"> leave a review here </span>
+  </p>
+  <input type="hidden" value="<%=user%>" name="user">
+
+
+
+  <% for(let i=0;i<orderDatas.products.item.length;i++){%>
+    <div class="alert alert-secondary alert-dismissible">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+
+
+      <div class="d-flex">
+        <div>
+          <img src="/uploads/<%=orderDatas.products.item[i].productId.image[0]%>" class="img-fluid" alt="lol"
+            width="150px" height="150px" style="border:solid 2px black; border-radius:20px">
+        </div>
+
+        <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, eveniet.</p> -->
+
+
+        <div>
+          <p class="text-dark ms-5 fs-5">
+            <%=orderDatas.products.item[i].productId.name %>
+          </p>
+
+          <textarea class="ms-5" placeholder="leave a review here"
+            id="<%=orderDatas.products.item[i].productId._id %>" required></textarea><br>
+          <button onclick="del('<%=orderDatas.products.item[i].productId._id%>',event)"
+            class="btn btn-primary ms-5">Post review</button>
+
+        </div>
+      </div>
+
+    </div>
+    <% } %>
+      <a href="/userProfile" class="btn btn-primary">Go Back</a>
+</div>
+<br>
+<br>
+
+<script>
+  function del(id, event) {
+    rev = document.getElementById(id).value
+    id = id
+    var alertDiv = event.target.closest('.alert');
+    alertDiv.parentNode.removeChild(alertDiv);
+
+    $.ajax({
+      url: `/writeReview`,
+      type: 'POST',
+      data: { rev, id },
+
+    })
+
+  }
+
+</script>
+
+
+  <%- include('../layouts/footer.ejs') %>

@@ -1,0 +1,79 @@
+<%- include ('../layouts/header.ejs') %>
+
+<br>
+
+    <!-- Breadcrumb Start -->
+    <div class="container-fluid">
+        <div class="row px-xl-5">
+            <div class="col-12">
+                <nav class="breadcrumb bg-light mb-30">
+                    <a class="breadcrumb-item text-dark" href="/home">Home</a>
+                    <span class="breadcrumb-item active">wishlist</span>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+
+    <!-- Cart Start -->
+    <% if(wishlistProducts.item.length==0){%>
+        <style>
+            #heart {}
+        </style>
+        
+
+        <div class="d-flex justify-content-center mt-5">
+            <lottie-player src="https://assets1.lottiefiles.com/packages/lf20_w7DMdes9Cs.json"  background="transparent"  speed="1"  style="width: 350px; height: 350px;"  loop  autoplay></lottie-player>
+            </div>
+
+
+        <%}else{%>
+            <div class="container-fluid">
+                <div class="row px-xl-5">
+                    <div class="col-12">
+                        <table class="table table-light table-borderless table-hover text-center mb-0">
+                            <thead class="thead-dark">
+                                <tr>
+
+                                    <th>Name</th>
+                                    <th>Image</th>
+                                    <th>Price</th>
+                                    <th>Add to Cart</th>
+                                    <th>Remove</th>
+                                </tr>
+                            </thead>
+                            <% for(let key of wishlistProducts.item){%>
+                                <tbody class="align-middle">
+                                    <tr>
+                                        <td class="align-middle">
+                                            <%=key.productId.name%>
+                                        </td>
+                                        <td class="align-middle"><a href="/view-details?id=<%=key.productId._id%>"><img
+                                                    src="/uploads/<%=key.productId.image[0]%>" alt=""
+                                                    style="width: 50px;"></a></td>
+                                        <td class="align-middle">
+                                            <%=key.productId.price%>
+                                        </td>
+                                        <td class="align-middle"><a
+                                                href="/adCartremoveWishlist?id=<%=key.productId._id%>"><button
+                                                    class="btn btn-sm btn-primary">Add</button></a></td>
+                                        <td class="align-middle"><a
+                                                href="/deleteWishlist?id=<%=key.productId._id%>"><button
+                                                    class="btn btn-sm btn-danger"><i
+                                                        class="fa fa-times"></i></button></a></td>
+                                    </tr>
+                                </tbody>
+                                <%}%>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+            <%}%>
+                <!-- Cart End -->
+
+                <!-- Back to Top -->
+                <br>
+
+                <%- include ('../layouts/footer.ejs') %>

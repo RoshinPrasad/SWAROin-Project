@@ -1,0 +1,71 @@
+<%- include ('../layouts/header.ejs') %>
+
+  <style>
+    span {
+      color: rgb(255, 0, 0);
+    }
+  </style>
+
+  <section class="vh-80 form-box" style="background-image: url('/assets/img/bg-reg4.jpg');">
+    <div class="container p-3 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+          <div class="card shadow-2-strong" style="border-radius: 1rem;">
+            <div class="card-body p-5 text-center">
+
+              <h3 class="mb-5">Login</h3>
+
+              <form action="/login" method="post" onsubmit="return allChecking()">
+
+                <div class="form-outline mb-4">
+                  <!-- <label class="form-label" for="email">Email address</label> -->
+                  <input type="email" id="email" name="email" class="form-control form-control-lg"
+                    onchange="emailValidate()" placeholder="Enter your email" />
+                  <span id="Email"></span>
+                </div>
+
+
+
+                <div class="form-outline mb-4">
+                  <!-- <label class="form-label" for="password">Password</label> -->
+                  <input type="password" id="password" class="form-control form-control-lg" name="password"
+                    onchange="passwordValidate()" placeholder="Enter your password" />
+                  <span id="Password"></span>
+                </div>
+
+                <div class="d-flex justify-content-around align-items-center mb-4"></div>
+
+
+                <button
+                  style="margin-bottom: 30px; width: 200px;background-color: rgb(63, 208, 63);border-radius: 20px ;padding:10px; "
+                  type="submit" class="btn" value="Login" onclick="emailValidate(),passwordValidate()">
+                  Login
+                </button>
+                <hr>
+                <a href="/forgot/forgot-p">forgot password?</a>
+                <div style="display: flex; justify-content: space-around;">
+                  <p class="mt-5"> New user<a href="/register" class="text-decoration-none text-primary"> Register
+                      here</a></p>
+                  <!-- <button class="btn btn-primary mt-5"><a href="../admin/login"
+                      class="text-decoration-none text-white">Admin Login</a></button> -->
+                </div>
+                <div class="">
+                  <% if(typeof message !=='undefined' ){ %>
+                    <span class="fs-4">
+                      <span style="color: red;">
+                        <%=message %>
+                      </span>
+                    </span>
+                    <% } %>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  </form>
+  <script src="validation.js"></script>
+
+  <%- include ('../layouts/footer.ejs') %>
