@@ -4,7 +4,6 @@ require("dotenv").config();
 
 
 const sendMessage = function (mobile, res, next) {
-  // let randomOTP = Math.floor(Math.random() * 9000)+1000;
   let randomOTP = 2759; // replace with hardcoded value
   var options = {
     authorization :process.env.SMS_API,
