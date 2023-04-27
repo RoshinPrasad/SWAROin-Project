@@ -39,8 +39,8 @@ app.all("*", (req, res) => {
   res.render("error")
 })
 
-app.listen(3000, function () {
-  console.log("server is running at 3000");
+app.listen(4000, function () {
+  console.log("server is running at 4000");
 });
 
 
