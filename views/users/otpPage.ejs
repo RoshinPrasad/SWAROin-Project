@@ -69,14 +69,19 @@
       background-color: #ffa500;
       border-color: #ffa500;
     }
-
+     
+     #otpInput {
+  border-radius: 100px;
+  border: 2px solid #221f1f;
+    }
+     
     #timer {
       font-weight: bold;
     }
   </style>
 </head>
 
-<body>
+<body style="background-image: url(https://cdn.wallpapersafari.com/37/37/mroUPV.jpg);">
   <div class="container my-5">
     <div class="row justify-content-center">
       <div class="col-md-6">
@@ -97,7 +102,7 @@
                   <button type="button" class="btn btn-dark ms-2" id="resendBtn"
                     onclick="startTimer(60);">Resend</button>
                 </div>
-                <span class="form-text text-muted" id="timer"></span>
+                <span class="form-text text-dark" id="timer"></span>
               </div>
               <div class="d-grid">
                 <button type="submit" class="btn btn-warning">Register</button>
