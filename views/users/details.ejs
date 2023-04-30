@@ -132,9 +132,9 @@
                     <% if(detail.stock<=5){%>
                         <% if(detail.stock<1){%>
                             <h6 style="color: red;">Stock Out!!</h6>
-                            <a href="/addToCart?id=<%=detail._id%>"> <button class="btn btn-primary px-3" disabled><i
-                                        class="fa fa-shopping-cart mr-1 "></i> Add To
-                                    Cart </button></a>
+                            <a href="/loadShop"> <button class="btn btn-primary px-3" disabled><i
+                                        class="fa fa-shopping-cart mr-1 "></i> Go To
+                                    Shop </button></a>
                             <%}else{%>
                                 <h6 style="color: red;">Only <%=detail.stock%> left</h6>
                                 <a href="/addToCart?id=<%=detail._id%>"> <button class="btn btn-primary px-3"><i
