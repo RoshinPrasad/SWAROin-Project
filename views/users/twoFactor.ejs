@@ -42,20 +42,20 @@
   </style>
 </head>
 
-<body>
+<body style="background-image: url(https://cdn.wallpapersafari.com/37/37/mroUPV.jpg); background-size: cover; ">
   <form action="/verifytwofact?id=<%=otp%>" method="post" style="height: 90vh;">
     <div class="container h-100">
       <div class="row align-items-center h-100">
         <div class="col-md-10 col-lg-6 col-xl-5 mx-auto">
-          <div class="card animate__animated animate__zoomIn">
-            <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4"><span class="text-main-1"></span>Enter OTP to Login
+          <div class="card animate__animated animate__zoomIn" style= "background-color: transparent; border:black;border: 2px solid #221f1f;">
+            <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4"><span class="text-main-1"></span>Two-Step Authentication
             </p>
            
 
             <form>
               <div class="form-group mb-4">
                 <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
-                <label class="form-label" for="form3Example3c">OTP</label>
+                <label class="form-label" for="form3Example3c">4-Digit Code</label>
                 <span class="ms-3" id="timer"></span>
                 <input type="number" id="form3Example3c" class="form-control" name="otp" />
                 <input type="hidden" id="form3Example3c" class="form-control" name="userDataid"
@@ -64,7 +64,7 @@
                   value="<%=userData.name%>" />
 
                 <div >
-                  <input type="submit" value="Login" class="btn btn-warning btn-md mt-2">
+                  <input type="submit" value="Login" class="btn btn-success btn-md mt-2">
                 </div>
 
               </div>
