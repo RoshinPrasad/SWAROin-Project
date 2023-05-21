@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+
+details {
+	border: 1px solid #000000;
+	border-radius: 4px;
+	padding: 10px;
+	cursor: grabbing;
+	color: aliceblue;
+}
+details:not(:last-child) {
+	margin-bottom: 0px;
+}
+
+summary,
+details[open] {
+	padding: 5px;
+}
+
+details[open] summary {
+	border-bottom: 1px solid #352c2c;
+	margin-bottom: 0px;
+}
+
